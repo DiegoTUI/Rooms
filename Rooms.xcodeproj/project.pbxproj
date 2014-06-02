@@ -26,8 +26,6 @@
 		76511AC81937319100CAB5C7 /* TUIGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 76511AC71937319100CAB5C7 /* TUIGeometry.m */; };
 		76511ACB193741C600CAB5C7 /* TUI2DCartesianCoordinatesSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 76511ACA193741C600CAB5C7 /* TUI2DCartesianCoordinatesSystem.m */; };
 		76511ACF1937500300CAB5C7 /* TUIGeometrySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 76511ACE1937500300CAB5C7 /* TUIGeometrySpec.m */; };
-		76511AD01937907000CAB5C7 /* TUI2DCartesianCoordinatesSystemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 76511ACC193747E100CAB5C7 /* TUI2DCartesianCoordinatesSystemSpec.m */; };
-		76511AD11937907400CAB5C7 /* TUICircleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 76511AC419372AA400CAB5C7 /* TUICircleSpec.m */; };
 		76511AD519387D1000CAB5C7 /* rooms.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 76511AD419387D1000CAB5C7 /* rooms.sqlite */; };
 		76511AD619387D1000CAB5C7 /* rooms.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 76511AD419387D1000CAB5C7 /* rooms.sqlite */; };
 		76511ADA1938836500CAB5C7 /* TUIFloorPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 76511AD91938836500CAB5C7 /* TUIFloorPlan.m */; };
@@ -89,6 +87,7 @@
 		76511ADF19389AFA00CAB5C7 /* test.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = test.sqlite; path = Resources/test.sqlite; sourceTree = "<group>"; };
 		76511AE81938A62100CAB5C7 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Rooms/Modules/Shared/Constants/Constants.h; sourceTree = SOURCE_ROOT; };
 		76511AE91938A75500CAB5C7 /* TUIFloorPlanSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TUIFloorPlanSpec.m; path = Modules/Navigation/Model/TUIFloorPlanSpec.m; sourceTree = "<group>"; };
+		76F9811E193C5FED000A5F3F /* Numbers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Numbers.h; path = Rooms/Modules/Shared/Constants/Numbers.h; sourceTree = SOURCE_ROOT; };
 		9481F998689D451399B07C22 /* Pods-RoomsTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoomsTests.xcconfig"; path = "Pods/Pods-RoomsTests.xcconfig"; sourceTree = "<group>"; };
 		C3EABC48BD4A477E98898E98 /* libPods-RoomsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoomsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -314,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				76511AE81938A62100CAB5C7 /* Constants.h */,
+				76F9811E193C5FED000A5F3F /* Numbers.h */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -468,9 +468,7 @@
 			files = (
 				76511ADB1938836500CAB5C7 /* TUIFloorPlan.m in Sources */,
 				76511AEA1938A75500CAB5C7 /* TUIFloorPlanSpec.m in Sources */,
-				76511AD11937907400CAB5C7 /* TUICircleSpec.m in Sources */,
 				76511ACF1937500300CAB5C7 /* TUIGeometrySpec.m in Sources */,
-				76511AD01937907000CAB5C7 /* TUI2DCartesianCoordinatesSystemSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

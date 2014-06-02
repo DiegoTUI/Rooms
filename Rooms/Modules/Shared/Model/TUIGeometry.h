@@ -30,17 +30,32 @@
                        andPoint:(CGPoint)secondPoint;
 
 /**
+ @methodName angleBetweenVector:andVector:
+ @abstract Calculates the angle formed by two given vectors
+ @discussion This method calculates the angle of two vectors taking into account the order of
+ the vectors. If you swap the vectors, you'll get the opposite angle.
+ IT RETURNS AN ANGLE BETWEEN 0 AND M_2_PI.
+ 
+ @param firstVector The first vector
+ @param secondCircle The second vector
+ 
+ @return The angle (BETWEEN 0 AND M_2_PI) between the two vectors
+ */
++ (CGFloat)angleBetweenVector:(CGPoint)firstVector
+                    andVector:(CGPoint)secondVector;
+
+/**
  @methodName angleWithTheXAxisAndLineDefinedByPoint:andPoint:
  @abstract Calculates the angle formed by a line and the x-axis of the reference system
  @discussion This method calculates the angle of a line defined by two points and the
  x-axis of the reference system. It takes into account the order of the points.
- firstPoint is the origin of the vector and secondPoint the end.If you swap the points,
- the angle will change its sign.
+ firstPoint is the origin of the vector and secondPoint the end. If you swap the points,
+ you will get the opposite angle. IT RETURNS AN ANGLE BETWEEN 0 AND M_2_PI
  
- @param firstPoint The point in the relative coordinate syste,
+ @param firstPoint The point in the relative coordinate system,
  @param secondCircle The relative coordinate system referred to the "absolute" reference system
  
- @return The (x,y) coordinates of a given point in the "absolute" reference system
+ @return The angle (BETWEEN 0 AND M_2_PI) of the x-axis with the vector defined by firstPoint and secondPoint
  */
 + (CGFloat)angleWithTheXAxisAndLineDefinedByPoint:(CGPoint)firstPoint
                                          andPoint:(CGPoint)secondPoint;

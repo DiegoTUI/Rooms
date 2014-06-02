@@ -56,8 +56,8 @@ describe(@"TUIFloorPlanSpec", ^{
         
         it(@"should return the right results for a valid room", ^{
             CGPoint location = [[TUIFloorPlan sharedInstanceForTesting] locationForRoom:@"testRoom"];
-            [[theValue(location.x) should] equal:theValue(0.0)];
-            [[theValue(location.y) should] equal:theValue(2.0)];
+            [[theValue(location.x) should] equal:theValue(ZERO_FLOAT)];
+            [[theValue(location.y) should] equal:theValue(TWO_FLOAT)];
         });
     });
     

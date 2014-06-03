@@ -56,9 +56,46 @@ describe(@"TUIFloorPlanSpec", ^{
         
         it(@"should return the right results for a valid room", ^{
             CGPoint location = [[TUIFloorPlan sharedInstanceForTesting] locationForRoom:@"testRoom"];
-            [[theValue(location.x) should] equal:theValue(ZERO_FLOAT)];
-            [[theValue(location.y) should] equal:theValue(TWO_FLOAT)];
+            [[theValue(location.x) should] equal:ZERO_FLOAT withDelta:EPSILON];
+            [[theValue(location.y) should] equal:TWO_FLOAT withDelta:EPSILON];
         });
+    });
+    
+    context(@"when querying for the floor of a room", ^{
+        
+        it(@"should return an nil string if the room does not exist", ^{
+            NSString *floor = [[TUIFloorPlan sharedInstanceForTesting] floorForRoom:@"unexistingRoom"];
+            [[floor should] beNil];
+        });
+        
+        it(@"should return the right results for a valid room", ^{
+            NSString *floor = [[TUIFloorPlan sharedInstanceForTesting] floorForRoom:@"testRoom"];
+            [[floor should] equal:@"testFloor"];
+        });
+    });
+    
+    context(@"when querying for the north vector of a floor", ^{
+        
+        it(@"should return an invalid north if the floor does not exist", ^{
+            CGPoint north = [[TUIFloorPlan sharedInstanceForTesting] locationForRoom:@"unexistingFloor"];
+            [[theValue(north.x) should] equal:theValue(INVALID_X_COORDINATE)];
+            [[theValue(north.y) should] equal:theValue(INVALID_Y_COORDINATE)];
+        });
+        
+        it(@"should return the right results for a valid room", ^{
+            CGPoint north = [[TUIFloorPlan sharedInstanceForTesting] northForFloor:@"testFloor"];
+            [[theValue(north.x) should] equal:-ONE_FLOAT withDelta:EPSILON];
+            [[theValue(north.y) should] equal:ZERO_FLOAT withDelta:EPSILON];
+        });
+    });
+    
+    context(@"when calculating the heading of a room", ^{
+        
+        it(@"should return the right heading", ^{
+            CGFloat heading = [[TUIFloorPlan sharedInstanceForTesting] headingForRoom:@"testRoom" beingInPosition:CGPointMake(ZERO_FLOAT, ZERO_FLOAT)];
+            [[theValue(heading) should] equal:M_PI_2 withDelta:EPSILON];
+        });
+        
     });
     
 });

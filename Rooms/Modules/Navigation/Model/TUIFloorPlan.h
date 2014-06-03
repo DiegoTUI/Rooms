@@ -53,6 +53,17 @@
 - (NSArray *)roomListForFloor:(NSString *)floorId;
 
 /**
+ @methodName northForFloor:
+ @abstract Returns the north vector for a given floor
+ @discussion This method returns the north vector of a floor given its floorId.
+ 
+ @param floorId The id of the floor
+ 
+ @return The north vector of the floor
+ */
+- (CGPoint)northForFloor:(NSString *)floorId;
+
+/**
  @methodName locationForRoom:
  @abstract Returns the location of a given room
  @discussion This method returns the location of a room given its roomId.
@@ -64,10 +75,21 @@
 - (CGPoint)locationForRoom:(NSString *)roomId;
 
 /**
+ @methodName floorForRoom:
+ @abstract Returns the floor of a given room
+ @discussion This method returns the floor (via the floorId) of a room given its roomId.
+ 
+ @param roomId The id of the room
+ 
+ @return The floorId of a room
+ */
+- (NSString *)floorForRoom:(NSString *)roomId;
+
+/**
  @methodName headingForRoom:beingInPosition:
  @abstract Returns the heading that a user located in a certain point should follow
  if he wants to reach a certain room.
- @discussion This method returns the heading (measured in degrees) that a user located 
+ @discussion This method returns the heading (measured in clockwise radians between 0 and 2*M_PI) that a user located 
  in a certain point should follow if he wants to reach a certain room.
  
  @param roomId The id of the room the user wanst to reach
@@ -75,7 +97,7 @@
  
  @return The heading to follow
  */
-- (CGPoint)headingForRoom:(NSString *)roomId
+- (CGFloat)headingForRoom:(NSString *)roomId
           beingInPosition:(CGPoint)position;
 
 @end

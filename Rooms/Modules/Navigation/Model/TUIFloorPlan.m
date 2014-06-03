@@ -9,6 +9,8 @@
 #import "TUIFloorPlan.h"
 // Extensions
 #import "TUIFloorPlan_Testing.h"
+// Models
+#import "TUIGeometry.h"
 // SQLite
 #import <sqlite3.h>
 
@@ -140,9 +142,6 @@ static NSString *const kRoomsTable = @"rooms";
     return result;
 }
 
-
-#pragma mark - Floors and rooms
-
 - (CGPoint)locationForRoom:(NSString *)roomId
 {
     CGPoint result = CGPointMake(INVALID_X_COORDINATE, INVALID_Y_COORDINATE);
@@ -170,6 +169,74 @@ static NSString *const kRoomsTable = @"rooms";
     
     return result;
 }
+
+- (NSString *)floorForRoom:(NSString *)roomId
+{
+    NSString *result = nil;
+    // prepare sqlite query
+    NSString *sqlString = [NSString stringWithFormat:@"SELECT floorId FROM %@ WHERE id='%@'", kRoomsTable, roomId];
+    const char *sql = [sqlString UTF8String];
+    sqlite3_stmt *sqlStatement;
+    if(sqlite3_prepare(_database, sql, -1, &sqlStatement, NULL) == SQLITE_OK)
+    {
+        while (sqlite3_step(sqlStatement)==SQLITE_ROW)
+        {
+            result = [NSString stringWithFormat:@"%s",(char *) sqlite3_column_text(sqlStatement,0)];
+        }
+    }
+    else //didnt prepare the statement right
+    {
+        NSLog(@"Problem when prepare statement: %@", sqlString);
+    }
+    
+    //finalize statement
+    sqlite3_finalize(sqlStatement);
+    
+    return result;
+}
+
+- (CGPoint)northForFloor:(NSString *)floorId
+{
+    CGPoint result = CGPointMake(INVALID_X_COORDINATE, INVALID_Y_COORDINATE);
+    // prepare sqlite query
+    NSString *sqlString = [NSString stringWithFormat:@"SELECT northX, northY FROM %@ WHERE id='%@'", kFloorsTable, floorId];
+    const char *sql = [sqlString UTF8String];
+    sqlite3_stmt *sqlStatement;
+    if(sqlite3_prepare(_database, sql, -1, &sqlStatement, NULL) == SQLITE_OK)
+    {
+        while (sqlite3_step(sqlStatement)==SQLITE_ROW)
+        {
+            CGFloat x = sqlite3_column_double(sqlStatement,0);
+            CGFloat y = sqlite3_column_double(sqlStatement,1);
+            
+            result = CGPointMake(x, y);
+        }
+    }
+    else //didnt prepare the statement right
+    {
+        NSLog(@"Problem when prepare statement: %@", sqlString);
+    }
+    
+    //finalize statement
+    sqlite3_finalize(sqlStatement);
+    
+    return result;
+}
+
+
+#pragma mark - Heading
+
+- (CGFloat)headingForRoom:(NSString *)roomId
+          beingInPosition:(CGPoint)position
+{
+    CGPoint roomCoordinates = [self locationForRoom:roomId];
+    CGPoint north = [self northForFloor:[self floorForRoom:roomId]];
+    
+    CGPoint userDirection = CGPointMake(roomCoordinates.x - position.x, roomCoordinates.y - position.y);
+    
+    return TWO_PI - [TUIGeometry angleBetweenVector:north andVector:userDirection];
+}
+
 
 #pragma mark - Init
 

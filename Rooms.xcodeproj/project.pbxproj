@@ -35,6 +35,8 @@
 		76511AE119389AFA00CAB5C7 /* test.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 76511ADF19389AFA00CAB5C7 /* test.sqlite */; };
 		76511AE61938A13500CAB5C7 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 76511ADC193892D200CAB5C7 /* libsqlite3.0.dylib */; };
 		76511AEA1938A75500CAB5C7 /* TUIFloorPlanSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 76511AE91938A75500CAB5C7 /* TUIFloorPlanSpec.m */; };
+		76F9811F193CA0C6000A5F3F /* TUICircleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 76511AC419372AA400CAB5C7 /* TUICircleSpec.m */; };
+		76F98120193CA0CA000A5F3F /* TUI2DCartesianCoordinatesSystemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 76511ACC193747E100CAB5C7 /* TUI2DCartesianCoordinatesSystemSpec.m */; };
 		85FB7EE4A0764D738A094A60 /* libPods-RoomsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EABC48BD4A477E98898E98 /* libPods-RoomsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -213,6 +215,7 @@
 		76511AB619371C6D00CAB5C7 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				76511AE71938A5C200CAB5C7 /* Constants */,
 				76511AB819371C8600CAB5C7 /* Model */,
 			);
 			name = Shared;
@@ -258,7 +261,6 @@
 		76511AC2193729B200CAB5C7 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				76511AE71938A5C200CAB5C7 /* Constants */,
 				76511AC3193729C400CAB5C7 /* Model */,
 			);
 			name = Shared;
@@ -316,7 +318,8 @@
 				76F9811E193C5FED000A5F3F /* Numbers.h */,
 			);
 			name = Constants;
-			sourceTree = "<group>";
+			path = RoomsTests;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -467,6 +470,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				76511ADB1938836500CAB5C7 /* TUIFloorPlan.m in Sources */,
+				76F9811F193CA0C6000A5F3F /* TUICircleSpec.m in Sources */,
+				76F98120193CA0CA000A5F3F /* TUI2DCartesianCoordinatesSystemSpec.m in Sources */,
 				76511AEA1938A75500CAB5C7 /* TUIFloorPlanSpec.m in Sources */,
 				76511ACF1937500300CAB5C7 /* TUIGeometrySpec.m in Sources */,
 			);

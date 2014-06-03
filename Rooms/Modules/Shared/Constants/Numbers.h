@@ -20,6 +20,7 @@
 #define TWO_FLOAT       2.0f
 #define THREE_FLOAT     3.0f
 #define TWO_PI          2.0f * M_PI
+#define EPSILON         0.00001f
 
 // Indexes
 #define ZERO_INDEX ZERO_INT

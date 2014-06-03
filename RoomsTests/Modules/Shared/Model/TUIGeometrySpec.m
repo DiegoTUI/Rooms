@@ -15,7 +15,6 @@ describe(@"TUIGeometrySpec", ^{
     
     CGPoint point1 = CGPointMake(3.45, 4.46);
     CGPoint point2 = CGPointMake(-2.21, 6.63);
-    CGFloat epsilon = 0.00001;
     
     context(@"when calculating distance between two points", ^{
         
@@ -59,7 +58,31 @@ describe(@"TUIGeometrySpec", ^{
             CGFloat result = [TUIGeometry angleBetweenVector:vector1 andVector:vector2];
             CGFloat reverseResult = [TUIGeometry angleBetweenVector:vector2 andVector:vector1];
             
-            [[theValue(fabs(result + reverseResult - TWO_PI) <= epsilon) should] beYes];
+            [[theValue(result + reverseResult) should] equal:TWO_PI withDelta:EPSILON];
+        });
+        
+        it(@"should return an angle bwtween 0 and TWO_PI", ^{
+            CGPoint vector1 = CGPointMake(10, 1);
+            CGPoint vector2 = CGPointMake(10, 2);
+            
+            CGFloat angle = [TUIGeometry angleBetweenVector:vector1 andVector:vector2];
+            [[theValue(angle > 0.0) should] beYes];
+            [[theValue(M_PI_2 - angle > 0.0) should] beYes];
+            
+            vector2 = CGPointMake(-2, 2);
+            angle = [TUIGeometry angleBetweenVector:vector1 andVector:vector2];
+            [[theValue(angle - M_PI_2 > 0.0) should] beYes];
+            [[theValue(M_PI - angle > 0.0) should] beYes];
+            
+            vector2 = CGPointMake(-2, -2);
+            angle = [TUIGeometry angleBetweenVector:vector1 andVector:vector2];
+            [[theValue(angle - M_PI > 0.0) should] beYes];
+            [[theValue(3*M_PI_2 - angle > 0.0) should] beYes];
+            
+            vector2 = CGPointMake(10, -1);
+            angle = [TUIGeometry angleBetweenVector:vector1 andVector:vector2];
+            [[theValue(angle - 3*M_PI_2 > 0.0) should] beYes];
+            [[theValue(TWO_PI - angle > 0.0) should] beYes];
         });
     });
     
@@ -67,7 +90,7 @@ describe(@"TUIGeometrySpec", ^{
         
         it(@"should be calculate the complementary angle if the points are swapped", ^{
             
-            [[theValue(fabs([TUIGeometry angleWithTheXAxisAndLineDefinedByPoint:point1 andPoint:point2] - [TUIGeometry angleWithTheXAxisAndLineDefinedByPoint:point2 andPoint:point1]) - M_PI <= epsilon) should] beYes];
+            [[theValue(fabs([TUIGeometry angleWithTheXAxisAndLineDefinedByPoint:point1 andPoint:point2] - [TUIGeometry angleWithTheXAxisAndLineDefinedByPoint:point2 andPoint:point1])) should] equal:M_PI withDelta:EPSILON];
         });
     });
     
@@ -146,18 +169,18 @@ describe(@"TUIGeometrySpec", ^{
             [[theValue([(NSValue *)intersectionPoints[0] CGPointValue].x < ZERO_FLOAT) should] beYes];
             [[theValue([(NSValue *)intersectionPoints[0] CGPointValue].y > ZERO_FLOAT) should] beYes];
             
-            if (fabs([(NSValue *)intersectionPoints[0] CGPointValue].x - [(NSValue *)intersectionPointsReverse[0] CGPointValue].x) <= epsilon &&
-                fabs([(NSValue *)intersectionPoints[0] CGPointValue].y - [(NSValue *)intersectionPointsReverse[0] CGPointValue].y) <= epsilon)
+            if (fabs([(NSValue *)intersectionPoints[0] CGPointValue].x - [(NSValue *)intersectionPointsReverse[0] CGPointValue].x) <= EPSILON &&
+                fabs([(NSValue *)intersectionPoints[0] CGPointValue].y - [(NSValue *)intersectionPointsReverse[0] CGPointValue].y) <= EPSILON)
             {
-                [[theValue(fabs([(NSValue *)intersectionPoints[1] CGPointValue].x - [(NSValue *)intersectionPointsReverse[1] CGPointValue].x) <= epsilon) should] beYes];
-                [[theValue(fabs([(NSValue *)intersectionPoints[1] CGPointValue].y - [(NSValue *)intersectionPointsReverse[1] CGPointValue].y) <= epsilon) should] beYes];
+                [[theValue([(NSValue *)intersectionPoints[1] CGPointValue].x) should] equal:[(NSValue *)intersectionPointsReverse[1] CGPointValue].x withDelta:EPSILON];
+                [[theValue([(NSValue *)intersectionPoints[1] CGPointValue].y) should] equal:[(NSValue *)intersectionPointsReverse[1] CGPointValue].y withDelta:EPSILON];
             }
             else
             {
-                [[theValue(fabs([(NSValue *)intersectionPoints[0] CGPointValue].x - [(NSValue *)intersectionPointsReverse[1] CGPointValue].x) <= epsilon) should] beYes];
-                [[theValue(fabs([(NSValue *)intersectionPoints[0] CGPointValue].y - [(NSValue *)intersectionPointsReverse[1] CGPointValue].y) <= epsilon) should] beYes];
-                [[theValue(fabs([(NSValue *)intersectionPoints[1] CGPointValue].x - [(NSValue *)intersectionPointsReverse[0] CGPointValue].x) <= epsilon) should] beYes];
-                [[theValue(fabs([(NSValue *)intersectionPoints[1] CGPointValue].y - [(NSValue *)intersectionPointsReverse[0] CGPointValue].y) <= epsilon) should] beYes];
+                [[theValue([(NSValue *)intersectionPoints[0] CGPointValue].x) should] equal:[(NSValue *)intersectionPointsReverse[1] CGPointValue].x withDelta:EPSILON];
+                [[theValue([(NSValue *)intersectionPoints[0] CGPointValue].y) should] equal:[(NSValue *)intersectionPointsReverse[1] CGPointValue].y withDelta:EPSILON];
+                [[theValue([(NSValue *)intersectionPoints[1] CGPointValue].x) should] equal:[(NSValue *)intersectionPointsReverse[0] CGPointValue].x withDelta:EPSILON];
+                [[theValue([(NSValue *)intersectionPoints[1] CGPointValue].y) should] equal:[(NSValue *)intersectionPointsReverse[0] CGPointValue].y withDelta:EPSILON];
             }
             
         });

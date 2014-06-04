@@ -1,4 +1,5 @@
 PODS:
+  - EstimoteSDK (1.3.0)
   - Kiwi/ARC (2.2.4)
   - Kiwi/NonARC (2.2.4)
   - Kiwi/XCTest (2.2.4):
@@ -6,9 +7,11 @@ PODS:
     - Kiwi/NonARC
 
 DEPENDENCIES:
+  - EstimoteSDK
   - Kiwi/XCTest (~> 2.2)
 
 SPEC CHECKSUMS:
+  EstimoteSDK: 9547fd8019967d18e9eac30a4a48b7a09a66f806
   Kiwi: c73667f2b84cbf36f1a3830267c5a4ae8dcbd8ba
 
 COCOAPODS: 0.33.1
